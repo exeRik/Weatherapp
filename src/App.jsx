@@ -1,6 +1,6 @@
 import { useState } from 'react'
-import RandFact  from './components/RandFact'
-import Weather from './components/Weather'
+
+import Weatherr from './components/Weatherr'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -13,8 +13,7 @@ function App() {
 
       </h1>
     </div> */}
-    <RandFact/> 
-    {/* <Weather/> */}
+    <Weatherr/>
     </>
   )
 }
