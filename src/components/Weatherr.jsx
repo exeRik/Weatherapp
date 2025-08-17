@@ -42,11 +42,24 @@ const Weatherr = () => {
 
     return data.forecast.forecastday[0].hour
       .filter((h) => new Date(h.time).getHours() > now)
-      .slice(0, 3); // only next 3 hours
+      .slice(0, 3); 
   };
 
+const chooseBgClass = () => {
+  if (!data || !data.current || !data.current.condition) return "bg-gray-500";
+
+  const condition = data.current.condition.text.toLowerCase();
+
+  if (condition.includes("sun")) return "bg-yellow-500";
+  if (condition.includes("rain")) return "bg-blue-500";
+  if (condition.includes("cloud")) return "bg-gray-700";
+
+  return "bg-gray-400"; 
+};
+
+
   return (
-    <div className="flex items-center justify-center h-screen bg-gray-400">
+    <div className={`flex items-center justify-center h-screen ${chooseBgClass()}`}>
       <div className="border border-2xl bg-white/40 backdrop-blur-md shadow-6xl rounded-2xl max-w-150 p-9 py-4 flex flex-col items-center">
         {/* Input Section */}
         <div className="flex">
@@ -66,7 +79,7 @@ const Weatherr = () => {
             className="bg-blue-500 text-white px-6 py-3 rounded-r-full shadow-md transition-all hover:bg-blue-600"
             onClick={searchWeather}
           >
-            Submit
+            Search
           </button>
         </div>
 
