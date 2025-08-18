@@ -46,22 +46,26 @@ const Weatherr = () => {
   };
 
 const chooseBgClass = () => {
-  if (!data || !data.current || !data.current.condition) return "bg-gray-500";
+  if (!data || !data.current || !data.current.condition) return "bg-green-100";
 
   const condition = data.current.condition.text.toLowerCase();
 
-  if (condition.includes("sun")) return "bg-yellow-500";
-  if (condition.includes("rain")) return "bg-blue-500";
-  if (condition.includes("cloud")) return "bg-gray-700";
+  if (condition.includes("sun")) return "bg-yellow-200";
+  if (condition.includes("rain")) return "bg-blue-200";
+  if (condition.includes("cloud")) return "bg-gray-300";
 
-  return "bg-gray-400"; 
+  return "bg-green-200"; 
 };
 
 
   return (
     <div className={`flex items-center justify-center h-screen ${chooseBgClass()}`}>
       <div className="border border-2xl bg-white/40 backdrop-blur-md shadow-6xl rounded-2xl max-w-150 p-9 py-4 flex flex-col items-center">
+
         {/* Input Section */}
+
+        <div className="text-xl">WEATHER GENERATOR:<br/><br/></div>
+
         <div className="flex">
           <input
             type="text"
