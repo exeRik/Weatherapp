@@ -46,15 +46,16 @@ const Weatherr = () => {
   };
 
 const chooseBgClass = () => {
-  if (!data || !data.current || !data.current.condition) return "bg-white-200";
+  if (!data || !data.current || !data.current.condition) return "g-gradient-to-t from-gray-100 via-gray-400 to-gray-100";
 
   const condition = data.current.condition.text.toLowerCase();
 
-  if (condition.includes("sun")) return "bg-yellow-200";
-  if (condition.includes("rain")) return "bg-blue-200";
-  if (condition.includes("cloud")) return "bg-gray-300";
+  if (condition.includes("sun")) return "bg-gradient-to-t from-yellow-200 via-orange-300 to-yellow-200";
+  if (condition.includes("partly") && condition.includes("cloud")) return "bg-gradient-to-t from-gray-100 via-yellow-200 to-gray-400";
+  if (condition.includes("rain")) return "bg-gradient-to-t from-blue-100 via-blue-400 to-blue-100";
+  if (condition.includes("cloud")) return "bg-gradient-to-t from-gray-200 via-gray-500 to-gray-100";
 
-  return "bg-green-200"; 
+  return "bg-gradient-to-t from-gray-200 via-gray-400 to-gray-100"; 
 };
 
 
