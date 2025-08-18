@@ -46,7 +46,7 @@ const Weatherr = () => {
   };
 
 const chooseBgClass = () => {
-  if (!data || !data.current || !data.current.condition) return "bg-green-100";
+  if (!data || !data.current || !data.current.condition) return "bg-white-200";
 
   const condition = data.current.condition.text.toLowerCase();
 
@@ -60,11 +60,11 @@ const chooseBgClass = () => {
 
   return (
     <div className={`flex items-center justify-center h-screen ${chooseBgClass()}`}>
-      <div className="border border-2xl bg-white/40 backdrop-blur-md shadow-6xl rounded-2xl max-w-150 p-9 py-4 flex flex-col items-center">
+      <div className="border border-2xl bg-white/40 backdrop-blur-md shadow-6xl rounded-2xl max-w-150 p-9 py-8 flex flex-col items-center">
 
         {/* Input Section */}
 
-        <div className="text-xl">WEATHER GENERATOR:<br/><br/></div>
+        <div className="text-xl text-black drop-shadow-md tracking-wide font-bold  font-serif uppercase">WEATHER GENERATOR:<br/><br/></div>
 
         <div className="flex">
           <input
@@ -88,8 +88,8 @@ const chooseBgClass = () => {
         </div>
 
         {/* Loading / Error */}
-        {loading && <p className="mt-4">Loading...</p>}
-        {error && <p className="mt-4 text-red-600">{error}</p>}
+        {loading && <p className="mt-4 text-2xl">Loading...</p>}
+        {error && <p className="mt-4 text-red-600 text-xl">{error}</p>}
 
         {/* Weather Display */}
         {data && !loading && !error && (
