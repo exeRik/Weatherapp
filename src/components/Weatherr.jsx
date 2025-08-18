@@ -1,12 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react"; 
 import Card from "./Card";
 import { Wind, Thermometer, Droplet, Clock } from "lucide-react";
 
 const Weatherr = () => {
-  const [city, setCity] = useState("");
+  const [city, setCity] = useState("Kathmandu");
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+
+
+  const inputRef = useRef(null);
 
   const API_KEY = "13b3ba61b64c436285e73544251608";
 
@@ -25,6 +28,13 @@ const Weatherr = () => {
       .catch((err) => setError("Error: " + err.message))
       .finally(() => setLoading(false));
   };
+
+
+   // ✅ Run once when app starts
+  useEffect(() => {
+    searchWeather("Kathmandu"); // ✅ fetch KTM on start
+    inputRef.current.focus();   // ✅ focus input box on load
+  }, []);
 
   const getIcon = () => {
     return (
@@ -61,7 +71,7 @@ const chooseBgClass = () => {
 
   return (
     <div className={`flex items-center justify-center h-screen ${chooseBgClass()}`}>
-      <div className="border border-2xl bg-white/40 backdrop-blur-md shadow-6xl rounded-2xl max-w-150 p-9 py-8 flex flex-col items-center">
+      <div className="border border-2xl bg-white/40 backdrop-blur-md shadow-6xl rounded-2xl max-w-150 p-9 py-7 flex flex-col items-center">
 
         {/* Input Section */}
 
@@ -74,6 +84,7 @@ const chooseBgClass = () => {
             className="text-2xl border rounded-l-full px-4 py-2 outline-none max-w-60"
             onChange={(e) => setCity(e.target.value)}
             value={city}
+            ref={inputRef}
             onKeyDown={(e) => {
               if (e.key === "Enter") {
                 searchWeather();
@@ -138,7 +149,9 @@ const chooseBgClass = () => {
             </div>
 
             {/*  Cards hmm */}
+            <div className="text-2xl mt-5 mb-0 text-bold ">Forecast for Next three hours:</div>
             <div className="flex mt-8">
+              
               {getNextThreeHours().map((hour, index) => (
                 <Card key={index} hour={hour} />
               ))}

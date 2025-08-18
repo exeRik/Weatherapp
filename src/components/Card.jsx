@@ -4,8 +4,9 @@ const Card = ({ hour }) => {
   if (!hour) return null;
 
   return (
-    <div className="bg-white/10 backdrop-blur-md rounded-xl shadow-md p-4 m-2 w-28 flex flex-col items-center text-center">
-      <p className="text-xs font-medium text-gray-700">
+
+    <div className="bg-white/10 backdrop-blur-md rounded-xl shadow-md px-4 py-2 mx-2 my-0 w-29 flex flex-col items-center text-center">
+      <p className="text-2xs font-medium text-gray-700">
         {new Date(hour.time).toLocaleTimeString([], {
           hour: "2-digit",
           minute: "2-digit",
