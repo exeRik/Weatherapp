@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react"; 
 import Card from "./Card";
 import { Wind, Thermometer, Droplet, Clock } from "lucide-react";
+import { fetchWeather } from "../utils/Api.js"; 
 
 const Weatherr = () => {
   const [city, setCity] = useState("Kathmandu");
@@ -11,29 +12,35 @@ const Weatherr = () => {
 
   const inputRef = useRef(null);
 
-  const API_KEY = "13b3ba61b64c436285e73544251608";
+  const API_KEY = import.meta.env.VITE_API_KEY;
 
   const searchWeather = () => {
     setError("");
     setLoading(true);
 
-    fetch(
-      `https://api.weatherapi.com/v1/forecast.json?key=${API_KEY}&q=${city}&days=1&aqi=no&alerts=no`
-    )
-      .then((res) => {
-        if (!res.ok) throw new Error("City not found");
-        return res.json();
-      })
+
+     fetchWeather(API_KEY, city)
       .then((json) => setData(json))
       .catch((err) => setError("Error: " + err.message))
       .finally(() => setLoading(false));
+
+    // fetch(
+    //   `https://api.weatherapi.com/v1/forecast.json?key=${API_KEY}&q=${city}&days=1&aqi=no&alerts=no`
+    // )
+    //   .then((res) => {
+    //     if (!res.ok) throw new Error("City not found");
+    //     return res.json();
+    //   })
+    //   .then((json) => setData(json))
+    //   .catch((err) => setError("Error: " + err.message))
+    //   .finally(() => setLoading(false));
   };
 
 
-   // ✅ Run once when app starts
+
   useEffect(() => {
-    searchWeather("Kathmandu"); // ✅ fetch KTM on start
-    inputRef.current.focus();   // ✅ focus input box on load
+    searchWeather("Kathmandu"); 
+    inputRef.current.focus();  
   }, []);
 
   const getIcon = () => {
